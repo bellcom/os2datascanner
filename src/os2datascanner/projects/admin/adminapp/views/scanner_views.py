@@ -28,7 +28,7 @@ class ScannerList(RestrictedListView):
 
     def get_queryset(self):
         """Get queryset, don't include non-visible scanners."""
-        qs = super().get_queryset()
+        qs = super().get_queryset().order_by('-id')
         # Dismiss scans that are not visible
         qs = qs.filter(is_visible=True)
         return qs
