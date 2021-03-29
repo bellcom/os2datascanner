@@ -17,7 +17,7 @@ class StatusOverview(RestrictedListView):
     model = ScanStatus
 
     def get_queryset(self):
-        return super().get_queryset().order_by("-pk")[:10]
+        return super().get_queryset().order_by("-pk")
 
 
 class StatusCompleted(RestrictedListView):
@@ -36,7 +36,7 @@ class ScannerList(RestrictedListView):
 
     def get_queryset(self):
         """Get queryset, don't include non-visible scanners."""
-        qs = super().get_queryset()
+        qs = super().get_queryset().order_by('-id')
         # Dismiss scans that are not visible
         qs = qs.filter(is_visible=True)
         return qs
